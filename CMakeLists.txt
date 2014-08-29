@@ -52,7 +52,7 @@ configure_file(
   ${CMAKE_SOURCE_DIR}/Util/GitDescription.cpp
 )
 file(GLOB ExtractorGlob Extractor/*.cpp)
-file(GLOB ImporterGlob DataStructures/Import*.cpp)
+file(GLOB ImporterGlob DataStructures/ImportEdge.cpp DataStructures/ExternalMemoryNode.cpp)
 add_library(IMPORT OBJECT ${ImporterGlob})
 set(ExtractorSources extractor.cpp ${ExtractorGlob})
 add_executable(osrm-extract ${ExtractorSources} $<TARGET_OBJECTS:COORDINATE> $<TARGET_OBJECTS:FINGERPRINT> $<TARGET_OBJECTS:GITDESCRIPTION> $<TARGET_OBJECTS:IMPORT>)
