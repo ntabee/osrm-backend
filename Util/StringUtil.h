@@ -41,7 +41,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // precision:  position after decimal point
 // length: maximum number of digits including comma and decimals
 // work with negative values to prevent overflowing when taking -value
-template <int length, int precision> static char *printInt(char *buffer, int value)
+template <int length, int precision> static inline char *printInt(char *buffer, int value)
 {
     bool minus = true;
     if (value > 0)
@@ -82,7 +82,7 @@ auto as_integer(Enumeration const value)
     return static_cast<typename std::underlying_type<Enumeration>::type>(value);
 }
 
-static std::string IntToString(const int value)
+static inline std::string IntToString(const int value)
 {
     std::string output;
     std::back_insert_iterator<std::string> sink(output);
@@ -90,7 +90,7 @@ static std::string IntToString(const int value)
     return output;
 }
 
-static std::string UintToString(const unsigned value)
+static inline std::string UintToString(const unsigned value)
 {
     std::string output;
     std::back_insert_iterator<std::string> sink(output);
@@ -98,14 +98,14 @@ static std::string UintToString(const unsigned value)
     return output;
 }
 
-static void int64ToString(const int64_t value, std::string &output)
+static inline void int64ToString(const int64_t value, std::string &output)
 {
     output.clear();
     std::back_insert_iterator<std::string> sink(output);
     boost::spirit::karma::generate(sink, boost::spirit::karma::long_long, value);
 }
 
-static int StringToInt(const std::string &input)
+static inline int StringToInt(const std::string &input)
 {
     auto first_digit = input.begin();
     // Delete any trailing white-spaces
@@ -118,7 +118,7 @@ static int StringToInt(const std::string &input)
     return value;
 }
 
-static unsigned StringToUint(const std::string &input)
+static inline unsigned StringToUint(const std::string &input)
 {
     auto first_digit = input.begin();
     // Delete any trailing white-spaces
@@ -131,7 +131,7 @@ static unsigned StringToUint(const std::string &input)
     return value;
 }
 
-static uint64_t StringToInt64(const std::string &input)
+static inline uint64_t StringToInt64(const std::string &input)
 {
     auto first_digit = input.begin();
     // Delete any trailing white-spaces
@@ -145,7 +145,7 @@ static uint64_t StringToInt64(const std::string &input)
 }
 
 // source: http://tinodidriksen.com/2011/05/28/cpp-convert-string-to-double-speed/
-static double StringToDouble(const char *p)
+static inline double StringToDouble(const char *p)
 {
     double r = 0.0;
     bool neg = false;
@@ -190,7 +190,7 @@ typedef
 boost::spirit::karma::real_generator<double, scientific_policy<double> >
 science_type;
 
-static std::string FixedDoubleToString(const double value)
+static inline std::string FixedDoubleToString(const double value)
 {
     std::string output;
     std::back_insert_iterator<std::string> sink(output);
@@ -202,7 +202,7 @@ static std::string FixedDoubleToString(const double value)
     return output;
 }
 
-static std::string DoubleToString(const double value)
+static inline std::string DoubleToString(const double value)
 {
     std::string output;
     std::back_insert_iterator<std::string> sink(output);
@@ -210,7 +210,7 @@ static std::string DoubleToString(const double value)
     return output;
 }
 
-static void doubleToStringWithTwoDigitsBehindComma(const double value, std::string &output)
+static inline void doubleToStringWithTwoDigitsBehindComma(const double value, std::string &output)
 {
     // The largest 32-bit integer is 4294967295, that is 10 chars
     // On the safe side, add 1 for sign, and 1 for trailing zero
@@ -219,12 +219,12 @@ static void doubleToStringWithTwoDigitsBehindComma(const double value, std::stri
     output = buffer;
 }
 
-void replaceAll(std::string &s, const std::string &sub, const std::string &other)
+inline void replaceAll(std::string &s, const std::string &sub, const std::string &other)
 {
     boost::replace_all(s, sub, other);
 }
 
-std::string EscapeJSONString(const std::string &input)
+inline std::string EscapeJSONString(const std::string &input)
 {
     std::string output;
     output.reserve(input.size());
@@ -268,7 +268,7 @@ static std::string originals[] = {"&", "\"", "<", ">", "'", "[", "]", "\\"};
 static std::string entities[] = {"&amp;", "&quot;", "&lt;", "&gt;",
                                  "&#39;", "&91;",   "&93;", " &#92;"};
 
-std::size_t URIDecode(const std::string &input, std::string &output)
+inline std::size_t URIDecode(const std::string &input, std::string &output)
 {
     auto src_iter = input.begin();
     output.resize(input.size() + 1);
@@ -292,14 +292,14 @@ std::size_t URIDecode(const std::string &input, std::string &output)
     return decoded_length;
 }
 
-std::size_t URIDecodeInPlace(std::string &URI) { return URIDecode(URI, URI); }
+inline std::size_t URIDecodeInPlace(std::string &URI) { return URIDecode(URI, URI); }
 
-bool StringStartsWith(const std::string &input, const std::string &prefix)
+inline bool StringStartsWith(const std::string &input, const std::string &prefix)
 {
     return boost::starts_with(input, prefix);
 }
 
-std::string GetRandomString()
+inline std::string GetRandomString()
 {
     std::string s;
     s.resize(128);

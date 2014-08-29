@@ -30,12 +30,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <cmath>
 
-float y2lat(const float a)
+inline float y2lat(const float a)
 {
     return 180.f * static_cast<float>(M_1_PI) * (2.f * std::atan(std::exp(a * static_cast<float>(M_PI) / 180.f)) - static_cast<float>(M_PI_2));
 }
 
-float lat2y(const float a)
+inline float lat2y(const float a)
 {
     return 180.f * static_cast<float>(M_1_PI) * std::log(std::tan(static_cast<float>(M_PI_4) + a * (static_cast<float>(M_PI) / 180.f) / 2.f));
 }

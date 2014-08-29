@@ -46,14 +46,14 @@ const static unsigned INIT_OK_DO_NOT_START_ENGINE = 1;
 const static unsigned INIT_FAILED = -1;
 
 // generate boost::program_options object for the routing part
-unsigned GenerateServerProgramOptions(const int argc,
-                                      const char *argv[],
-                                      ServerPaths &paths,
-                                      std::string &ip_address,
-                                      int &ip_port,
-                                      int &requested_num_threads,
-                                      bool &use_shared_memory,
-                                      bool &trial)
+inline unsigned GenerateServerProgramOptions(const int argc,
+                                             const char *argv[],
+                                             ServerPaths &paths,
+                                             std::string &ip_address,
+                                             int &ip_port,
+                                             int &requested_num_threads,
+                                             bool &use_shared_memory,
+                                             bool &trial)
 {
 
     // declare a group of options that will be allowed only on command line
