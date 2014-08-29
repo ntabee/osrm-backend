@@ -24,16 +24,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef __NUMERIC_UTIL_H__
-#define __NUMERIC_UTIL_H__
+#ifndef NUMERIC_UTIL_H__
+#define NUMERIC_UTIL_H__
 
 #include <cstdlib>
 
 #include <limits>
 
-template <typename FloatT> inline bool EpsilonCompare(const FloatT d1, const FloatT d2)
+template <typename T> bool EpsilonCompare(const T d1, const T d2)
 {
-    return (std::abs(d1 - d2) < std::numeric_limits<FloatT>::epsilon());
+    return (std::abs(d1 - d2) < std::numeric_limits<T>::epsilon());
 }
 
 #endif
