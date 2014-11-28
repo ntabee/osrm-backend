@@ -66,6 +66,7 @@ int main(int argc, const char *argv[])
     {
         std::string ip_address;
         int ip_port, requested_thread_num;
+        int max_locations_distance_table;
         bool use_shared_memory = false, trial_run = false;
         ServerPaths server_paths;
 
@@ -76,7 +77,8 @@ int main(int argc, const char *argv[])
                                                                   ip_port,
                                                                   requested_thread_num,
                                                                   use_shared_memory,
-                                                                  trial_run);
+                                                                  trial_run,
+                                                                  max_locations_distance_table);
 
         if (init_result == INIT_FAILED)
         {
