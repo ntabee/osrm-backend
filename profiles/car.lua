@@ -12,20 +12,20 @@ ignore_in_grid = { ["ferry"] = true }
 restriction_exception_tags = { "motorcar", "motor_vehicle", "vehicle" }
 
 speed_profile = {
-  ["motorway"] = 90,
+  ["motorway"] = 60,
   ["motorway_link"] = 45,
-  ["trunk"] = 85,
-  ["trunk_link"] = 40,
-  ["primary"] = 65,
-  ["primary_link"] = 30,
-  ["secondary"] = 55,
+  ["trunk"] = 50,
+  ["trunk_link"] = 30,
+  ["primary"] = 30,
+  ["primary_link"] = 25,
+  ["secondary"] = 30,
   ["secondary_link"] = 25,
-  ["tertiary"] = 40,
-  ["tertiary_link"] = 20,
-  ["unclassified"] = 25,
-  ["residential"] = 25,
-  ["living_street"] = 10,
-  ["service"] = 15,
+  ["tertiary"] = 25,
+  ["tertiary_link"] = 15,
+  ["unclassified"] = 15,
+  ["residential"] = 15,
+  ["living_street"] = 5,
+  ["service"] = 10,
 --  ["track"] = 5,
   ["ferry"] = 5,
   ["shuttle_train"] = 10,
@@ -85,8 +85,8 @@ tracktype_speeds = {
 
 -- max speed for smoothnesses
 smoothness_speeds = {
-  ["intermediate"]    =  80,
-  ["bad"]             =  40,
+  ["intermediate"]    =  60,
+  ["bad"]             =  30,
   ["very_bad"]        =  20,
   ["horrible"]        =  10,
   ["very_horrible"]   =  5,
@@ -96,9 +96,9 @@ smoothness_speeds = {
 -- http://wiki.openstreetmap.org/wiki/Speed_limits
 maxspeed_table_default = {
   ["urban"] = 50,
-  ["rural"] = 90,
-  ["trunk"] = 110,
-  ["motorway"] = 130
+  ["rural"] = 60,
+  ["trunk"] = 60,
+  ["motorway"] = 100
 }
 
 -- List only exceptions
@@ -126,14 +126,14 @@ maxspeed_table = {
   ["uk:motorway"] = (70*1609)/1000
 }
 
-traffic_signal_penalty          = 2
+traffic_signal_penalty          = 20
 use_turn_restrictions           = true
 
 local take_minimum_of_speeds    = false
 local obey_oneway               = true
 local obey_bollards             = true
 local ignore_areas              = true     -- future feature
-local u_turn_penalty            = 20
+local u_turn_penalty            = 60
 
 local abs = math.abs
 local min = math.min
