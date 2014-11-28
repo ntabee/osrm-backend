@@ -105,23 +105,23 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
     set(CMAKE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage -fno-inline")
   endif()
 endif()
-if(CMAKE_BUILD_TYPE MATCHES Release)
-  message(STATUS "Configuring OSRM in release mode")
-  # Check if LTO is available
-  set(LTO_FLAGS "")
-  CHECK_CXX_COMPILER_FLAG("-flto" HAS_LTO_FLAG)
-  if (HAS_LTO_FLAG)
-    set(LTO_FLAGS "${LTO_FLAGS} -flto")
-
-    # Since gcc 4.9 the LTO format is non-standart ('slim'), so we need to use the build-in tools
-    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" AND
-        NOT "${CMAKE_CXX_COMPILER_VERSION}" VERSION_LESS "4.9.0")
-      message(STATUS "Using gcc specific binutils for LTO.")
-      set(CMAKE_AR     "/usr/bin/gcc-ar")
-      set(CMAKE_RANLIB "/usr/bin/gcc-ranlib")
-    endif()
-  endif (HAS_LTO_FLAG)
-endif()
+#if(CMAKE_BUILD_TYPE MATCHES Release)
+#  message(STATUS "Configuring OSRM in release mode")
+#  # Check if LTO is available
+#  set(LTO_FLAGS "")
+#  CHECK_CXX_COMPILER_FLAG("-flto" HAS_LTO_FLAG)
+#  if (HAS_LTO_FLAG)
+#    set(LTO_FLAGS "${LTO_FLAGS} -flto")
+#
+#    # Since gcc 4.9 the LTO format is non-standart ('slim'), so we need to use the build-in tools
+#    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" AND
+#        NOT "${CMAKE_CXX_COMPILER_VERSION}" VERSION_LESS "4.9.0")
+#      message(STATUS "Using gcc specific binutils for LTO.")
+#      set(CMAKE_AR     "/usr/bin/gcc-ar")
+#      set(CMAKE_RANLIB "/usr/bin/gcc-ranlib")
+#    endif()
+#  endif (HAS_LTO_FLAG)
+#endif()
 
 if (NOT WIN32)
 add_definitions(-DBOOST_TEST_DYN_LINK)
@@ -282,18 +282,18 @@ target_link_libraries(osrm-routed ${ZLIB_LIBRARY})
 
 if(WITH_TOOLS OR BUILD_TOOLS)
   message(STATUS "Activating OSRM internal tools")
-  find_package(GDAL)
-  if(GDAL_FOUND)
-    add_executable(osrm-components Tools/components.cpp)
-    target_link_libraries(osrm-components ${TBB_LIBRARIES} IMPORT)
-    include_directories(${GDAL_INCLUDE_DIR})
-    target_link_libraries(
-      osrm-components
-      ${GDAL_LIBRARIES} ${Boost_LIBRARIES} FINGERPRINT GITDESCRIPTION COORDLIB)
-    install(TARGETS osrm-components DESTINATION bin)
-  else()
-    message(FATAL_ERROR "libgdal and/or development headers not found")
-  endif()
+#  find_package(GDAL)
+#  if(GDAL_FOUND)
+#    add_executable(osrm-components Tools/components.cpp)
+#    target_link_libraries(osrm-components ${TBB_LIBRARIES} IMPORT)
+#    include_directories(${GDAL_INCLUDE_DIR})
+#    target_link_libraries(
+#      osrm-components
+#      ${GDAL_LIBRARIES} ${Boost_LIBRARIES} FINGERPRINT GITDESCRIPTION COORDLIB)
+#    install(TARGETS osrm-components DESTINATION bin)
+#  else()
+#    message(FATAL_ERROR "libgdal and/or development headers not found")
+#  endif()
   add_executable(osrm-cli Tools/simpleclient.cpp)
   target_link_libraries(osrm-cli ${Boost_LIBRARIES} ${OPTIONAL_SOCKET_LIBS} OSRM FINGERPRINT GITDESCRIPTION)
   target_link_libraries(osrm-cli ${TBB_LIBRARIES})
