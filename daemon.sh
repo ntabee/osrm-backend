@@ -27,7 +27,7 @@ NAME=osrm-routed
 DHOME=/home/osm
 DAEMON=$DHOME/$NAME
 SHMLOADER=$DHOME/osrm-datastore
-SHMUNLOADER=$DHOME/osrm-springclean
+SHMUNLOADER="$DHOME/osrm-datastore -s"
 DDATA="$DHOME/routed/japan-extract.osrm"
 DAEMON_ARGS="--max_locations_distance_table 500 --sharedmemory --threads 4 --ip 0.0.0.0"
 PIDFILE=/var/run/$NAME/$NAME.pid
@@ -91,7 +91,7 @@ do_stop()
     # Many daemons don't delete their pidfiles when they exit.
     rm -f $PIDFILE
 
-    /usr/bin/yes Y | $SHMUNLOADER
+    $SHMUNLOADER
     return "$RETVAL"
 }
 
