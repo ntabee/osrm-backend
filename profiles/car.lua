@@ -16,12 +16,12 @@ speed_profile = {
   ["motorway_link"] = 45,
   ["trunk"] = 50,
   ["trunk_link"] = 30,
-  ["primary"] = 40,
+  ["primary"] = 30,
   ["primary_link"] = 25,
-  ["secondary"] = 40,
+  ["secondary"] = 30,
   ["secondary_link"] = 25,
-  ["tertiary"] = 30,
-  ["tertiary_link"] = 20,
+  ["tertiary"] = 25,
+  ["tertiary_link"] = 15,
   ["unclassified"] = 15,
   ["residential"] = 15,
   ["living_street"] = 5,
@@ -32,7 +32,7 @@ speed_profile = {
   ["default"] = 10
 }
 
-traffic_signal_penalty          = 2
+traffic_signal_penalty          = 20
 
 -- End of globals
 local take_minimum_of_speeds    = false
@@ -40,7 +40,7 @@ local obey_oneway               = true
 local obey_bollards             = true
 local use_turn_restrictions     = true
 local ignore_areas              = true     -- future feature
-local u_turn_penalty            = 20
+local u_turn_penalty            = 60
 
 local abs = math.abs
 local min = math.min
