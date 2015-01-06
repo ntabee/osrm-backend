@@ -32,7 +32,6 @@ speed_profile = {
   ["default"] = 10
 }
 
-
 -- surface/trackype/smoothness
 -- values were estimated from looking at the photos at the relevant wiki pages
 
