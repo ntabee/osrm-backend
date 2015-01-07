@@ -288,7 +288,6 @@ target_link_libraries(osrm-routed ${ZLIB_LIBRARY})
 
 if(WITH_TOOLS OR BUILD_TOOLS)
   message(STATUS "Activating OSRM internal tools")
-<<<<<<< HEAD
   find_package(GDAL)
   if(GDAL_FOUND)
     add_executable(osrm-components tools/components.cpp $<TARGET_OBJECTS:FINGERPRINT> $<TARGET_OBJECTS:IMPORT> $<TARGET_OBJECTS:COORDINATE> $<TARGET_OBJECTS:LOGGER> $<TARGET_OBJECTS:RESTRICTION> $<TARGET_OBJECTS:EXCEPTION>)
@@ -303,22 +302,6 @@ if(WITH_TOOLS OR BUILD_TOOLS)
   endif()
   add_executable(osrm-cli tools/simpleclient.cpp $<TARGET_OBJECTS:EXCEPTION> $<TARGET_OBJECTS:LOGGER>)
   target_link_libraries(osrm-cli ${Boost_LIBRARIES} ${OPTIONAL_SOCKET_LIBS} OSRM)
-=======
-#  find_package(GDAL)
-#  if(GDAL_FOUND)
-#    add_executable(osrm-components Tools/components.cpp)
-#    target_link_libraries(osrm-components ${TBB_LIBRARIES} IMPORT)
-#    include_directories(${GDAL_INCLUDE_DIR})
-#    target_link_libraries(
-#      osrm-components
-#      ${GDAL_LIBRARIES} ${Boost_LIBRARIES} FINGERPRINT GITDESCRIPTION COORDLIB)
-#    install(TARGETS osrm-components DESTINATION bin)
-#  else()
-#    message(FATAL_ERROR "libgdal and/or development headers not found")
-#  endif()
-  add_executable(osrm-cli Tools/simpleclient.cpp)
-  target_link_libraries(osrm-cli ${Boost_LIBRARIES} ${OPTIONAL_SOCKET_LIBS} OSRM FINGERPRINT GITDESCRIPTION)
->>>>>>> Commented-out CMake portions which are unnecessary & blocking under our specific envrionment
   target_link_libraries(osrm-cli ${TBB_LIBRARIES})
   add_executable(osrm-io-benchmark tools/io-benchmark.cpp $<TARGET_OBJECTS:EXCEPTION> $<TARGET_OBJECTS:GITDESCRIPTION> $<TARGET_OBJECTS:LOGGER>)
   target_link_libraries(osrm-io-benchmark ${Boost_LIBRARIES})
