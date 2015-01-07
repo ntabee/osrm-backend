@@ -57,8 +57,7 @@ namespace boost { namespace interprocess { class named_mutex; } }
 #include <utility>
 #include <vector>
 
-OSRM_impl::OSRM_impl(const ServerPaths &server_paths, const bool use_shared_memory, const int max_locations_distance_table)
-    : use_shared_memory(use_shared_memory)
+OSRM_impl::OSRM_impl(ServerPaths &server_paths, const bool use_shared_memory, const int max_locations_distance_table)
 {
     if (use_shared_memory)
     {
@@ -153,13 +152,8 @@ void OSRM_impl::RunQuery(RouteParameters &route_parameters, http::Reply &reply)
 
 // proxy code for compilation firewall
 
-<<<<<<< HEAD
-OSRM::OSRM(ServerPaths paths, const bool use_shared_memory)
-    : OSRM_pimpl_(osrm::make_unique<OSRM_impl>(paths, use_shared_memory))
-=======
-OSRM::OSRM(const ServerPaths &paths, const bool use_shared_memory, const int max_locations_distance_table)
+OSRM::OSRM(ServerPaths &paths, const bool use_shared_memory, const int max_locations_distance_table)
     : OSRM_pimpl_(new OSRM_impl(paths, use_shared_memory, max_locations_distance_table))
->>>>>>> Hand-merged max_locations_distance_table
 {
 }
 

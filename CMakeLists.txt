@@ -126,7 +126,7 @@ endif()
 #
 #    # Since gcc 4.9 the LTO format is non-standart ('slim'), so we need to use the build-in tools
 #    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" AND
-#        NOT "${CMAKE_CXX_COMPILER_VERSION}" VERSION_LESS "4.9.0")
+#        NOT "${CMAKE_CXX_COMPILER_VERSION}" VERSION_LESS "4.9.0" AND NOT MINGW)
 #      message(STATUS "Using gcc specific binutils for LTO.")
 #      set(CMAKE_AR     "/usr/bin/gcc-ar")
 #      set(CMAKE_RANLIB "/usr/bin/gcc-ranlib")
@@ -289,17 +289,17 @@ target_link_libraries(osrm-routed ${ZLIB_LIBRARY})
 if(WITH_TOOLS OR BUILD_TOOLS)
   message(STATUS "Activating OSRM internal tools")
   find_package(GDAL)
-  if(GDAL_FOUND)
-    add_executable(osrm-components tools/components.cpp $<TARGET_OBJECTS:FINGERPRINT> $<TARGET_OBJECTS:IMPORT> $<TARGET_OBJECTS:COORDINATE> $<TARGET_OBJECTS:LOGGER> $<TARGET_OBJECTS:RESTRICTION> $<TARGET_OBJECTS:EXCEPTION>)
-    target_link_libraries(osrm-components ${TBB_LIBRARIES})
-    include_directories(${GDAL_INCLUDE_DIR})
-    target_link_libraries(
-      osrm-components
-      ${GDAL_LIBRARIES} ${Boost_LIBRARIES})
-    install(TARGETS osrm-components DESTINATION bin)
-  else()
-    message(FATAL_ERROR "libgdal and/or development headers not found")
-  endif()
+#  if(GDAL_FOUND)
+#    add_executable(osrm-components tools/components.cpp $<TARGET_OBJECTS:FINGERPRINT> $<TARGET_OBJECTS:IMPORT> $<TARGET_OBJECTS:COORDINATE> $<TARGET_OBJECTS:LOGGER> $<TARGET_OBJECTS:RESTRICTION> $<TARGET_OBJECTS:EXCEPTION>)
+#    target_link_libraries(osrm-components ${TBB_LIBRARIES})
+#    include_directories(${GDAL_INCLUDE_DIR})
+#    target_link_libraries(
+#      osrm-components
+#      ${GDAL_LIBRARIES} ${Boost_LIBRARIES})
+#    install(TARGETS osrm-components DESTINATION bin)
+#  else()
+#    message(FATAL_ERROR "libgdal and/or development headers not found")
+#  endif()
   add_executable(osrm-cli tools/simpleclient.cpp $<TARGET_OBJECTS:EXCEPTION> $<TARGET_OBJECTS:LOGGER>)
   target_link_libraries(osrm-cli ${Boost_LIBRARIES} ${OPTIONAL_SOCKET_LIBS} OSRM)
   target_link_libraries(osrm-cli ${TBB_LIBRARIES})

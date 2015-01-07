@@ -73,32 +73,9 @@ template <class DataFacadeT> class DistanceTablePlugin final : public BasePlugin
             return;
         }
 
-<<<<<<< HEAD:plugins/distance_table.hpp
         const bool checksum_OK = (route_parameters.check_sum == facade->GetCheckSum());
-        unsigned max_locations =
-            std::min(100u, static_cast<unsigned>(route_parameters.coordinates.size()));
-=======
-        RawRouteData raw_route;
-        raw_route.check_sum = facade->GetCheckSum();
-
-        if (std::any_of(begin(route_parameters.coordinates),
-                        end(route_parameters.coordinates),
-                        [&](FixedPointCoordinate coordinate)
-                        { return !coordinate.isValid(); }))
-        {
-            reply = http::Reply::StockReply(http::Reply::badRequest);
-            return;
-        }
-
-        for (const FixedPointCoordinate &coordinate : route_parameters.coordinates)
-        {
-            raw_route.raw_via_node_coordinates.emplace_back(std::move(coordinate));
-        }
-
-        const bool checksum_OK = (route_parameters.check_sum == raw_route.check_sum);
         unsigned max_locations = std::min(static_cast<unsigned>(max_locations_distance_table),
                                           static_cast<unsigned>(route_parameters.coordinates.size()));
->>>>>>> Hand-merged max_locations_distance_table:Plugins/DistanceTablePlugin.h
         PhantomNodeArray phantom_node_vector(max_locations);
         for (const auto i : osrm::irange(0u, max_locations))
         {
